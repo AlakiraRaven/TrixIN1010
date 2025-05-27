@@ -7,7 +7,7 @@ class Bokhylle {
     }
 
     //Forsoeker aa sette inn en bok paa foerste ledige plass i bokhyllen
-    public void settInn(Bok b) {
+    public void settInn(Bok b) throws DuplikatExeption, IkkeMerPlassException {
 
         for (int i = 0; i < boeker.length; i++) {
             if (boeker[i] == null) {
@@ -15,7 +15,11 @@ class Bokhylle {
                 boeker[i] = b;
                 return;
             }
+            if((boeker[i].toString()).equals(b.toString())) {
+                throw new DuplikatExeption(b.toString());
+            }
         }
+        throw new IkkeMerPlassException(b.toString());
     }
 
     public void skrivBoeker() {
